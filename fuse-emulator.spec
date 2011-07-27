@@ -91,13 +91,13 @@ EOF
 %__install -D -m 644 %{sname}32.png %{buildroot}%{_iconsdir}/%{sname}.png
 %__install -D -m 644 %{sname}16.png %{buildroot}%{_miconsdir}/%{sname}.png
 
-%if %mdkversion < 200900
+#if %mdkversion < 200900
 %post
-%update_menus
+%{update_menus}
 
 %postun
-%clean_menus
-%endif
+%{clean_menus}
+#endif
 
 %clean
 rm -rf %{buildroot}
