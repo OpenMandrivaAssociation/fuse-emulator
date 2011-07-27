@@ -20,9 +20,11 @@ BuildRequires:	libz-devel
 BuildRequires:	libbzip2-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libaudiofile-devel
+BuildRequires:	libalsa-devel
 BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	perl
+BuildRequires:	autoconf
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 Obsoletes:	fuse <= 0.7.0-4plf
@@ -52,6 +54,7 @@ This package is in PLF because it contains emulator related software.
 #patch0 -p1 -b .string-literal
 
 %build
+autoreconf
 %configure --with-gtk2
 %make \
 %if %mdkversion < 200910
