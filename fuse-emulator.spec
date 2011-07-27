@@ -11,7 +11,7 @@ Source0:	%{sname}-%{version}.tar.gz
 Source1:	%{sname}-icons.tar.bz2
 #Patch0:		%{name}-0.10.0.1-plf-string-literal.patch
 
-BuildRequires:	libjsw-devel
+BuildRequires:	jsw-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	libspectrum-devel
 BuildRequires:	libgcrypt-devel >= 1.1.42
