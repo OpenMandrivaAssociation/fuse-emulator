@@ -9,17 +9,17 @@ Group:		Emulators
 URL:		http://fuse-emulator.sourceforge.net/
 Source0:	%{sname}-%{version}.tar.gz
 Source1:	%{sname}-icons.tar.bz2
-
+Patch0:		fuse-1.0.0.1a-zlib.patch
 BuildRequires:	jsw-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	libspectrum-devel
 BuildRequires:	libgcrypt-devel >= 1.1.42
-BuildRequires:	libgtk+2-devel
-BuildRequires:	libz-devel
-BuildRequires:	libbzip2-devel
-BuildRequires:	libpng-devel
+BuildRequires:	gtk+2-devel
+BuildRequires:	zlib-devel
+BuildRequires:	bzip2-devel
+BuildRequires:	png-devel
 BuildRequires:	libaudiofile-devel
-BuildRequires:	libalsa-devel
+BuildRequires:	alsa-lib-devel
 BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	perl
@@ -47,6 +47,7 @@ What Fuse does have:
 %prep
 %setup -q -n %{sname}-%{version}
 %setup -q -T -D -a1 -n %{sname}-%{version}
+%patch0 -p1
 
 %build
 autoreconf
