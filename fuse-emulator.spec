@@ -3,7 +3,7 @@
 Summary:	Free Unix Spectrum Emulator
 Name:		fuse-emulator
 Version:	1.1.1
-Release:	1
+Release:	2
 Group:		Emulators
 License:	GPLv2+
 Url:		http://fuse-emulator.sourceforge.net/
