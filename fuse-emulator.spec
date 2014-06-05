@@ -3,9 +3,9 @@
 Summary:	Free Unix Spectrum Emulator
 Name:		fuse-emulator
 Version:	1.1.1
-Release:	2
-Group:		Emulators
+Release:	4
 License:	GPLv2+
+Group:		Emulators
 Url:		http://fuse-emulator.sourceforge.net/
 Source0:	%{sname}-%{version}.tar.gz
 Source1:	%{sname}-icons.tar.bz2
@@ -38,12 +38,25 @@ What Fuse does have:
   'competition mode'.
 * Emulation of the Spectrum +3e, ZXATASP and ZXCF IDE interfaces.
 
+%files
+%defattr(0644,root,root,0755)
+%doc README THANKS COPYING AUTHORS ChangeLog
+%attr(0755,root,root) %{_bindir}/*
+%{_datadir}/applications/%{name}.desktop
+%{_miconsdir}/%{sname}*
+%{_iconsdir}/%{sname}*
+%{_liconsdir}/%{sname}*
+%{_mandir}/*/*
+%{_datadir}/%{sname}
+
+#----------------------------------------------------------------------------
+
 %prep
 %setup -q -n %{sname}-%{version}
 %setup -q -T -D -a1 -n %{sname}-%{version}
 
 %build
-autoreconf
+autoreconf -fi
 %configure2_5x \
 	--enable-gtk2 \
 	--with-roms-dir=%{_datadir}/%{sname}
@@ -68,14 +81,4 @@ install -D -m 644 %{sname}48.png %{buildroot}%{_liconsdir}/%{sname}.png
 install -D -m 644 %{sname}32.png %{buildroot}%{_iconsdir}/%{sname}.png
 install -D -m 644 %{sname}16.png %{buildroot}%{_miconsdir}/%{sname}.png
 
-%files
-%defattr(0644,root,root,0755)
-%doc README THANKS COPYING AUTHORS ChangeLog
-%attr(0755,root,root) %{_bindir}/*
-%{_datadir}/applications/%{name}.desktop
-%{_miconsdir}/%{sname}*
-%{_iconsdir}/%{sname}*
-%{_liconsdir}/%{sname}*
-%{_mandir}/*/*
-%{_datadir}/%{sname}
 
