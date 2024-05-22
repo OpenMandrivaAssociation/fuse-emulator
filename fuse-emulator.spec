@@ -2,19 +2,19 @@
 
 Summary:	Free Unix Spectrum Emulator
 Name:		fuse-emulator
-Version:	1.1.1
-Release:	5
+Version:	1.6.0
+Release:	1
 License:	GPLv2+
 Group:		Emulators
-Url:		http://fuse-emulator.sourceforge.net/
-Source0:	%{sname}-%{version}.tar.gz
+Url:		https://fuse-emulator.sourceforge.net/
+Source0:	https://sourceforge.net/projects/fuse-emulator/files/fuse/%{version}/fuse-%{version}.tar.gz
 Source1:	%{sname}-icons.tar.bz2
 BuildRequires:	flex
 BuildRequires:	bison
-BuildRequires:	bzip2-devel
+BuildRequires:	pkgconfig(bzip2)
 BuildRequires:	jsw-devel
-BuildRequires:	libspectrum-devel >= %{version}
-BuildRequires:	libgcrypt-devel >= 1.1.42
+BuildRequires:	pkgconfig(libspectrum)
+BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(audiofile)
