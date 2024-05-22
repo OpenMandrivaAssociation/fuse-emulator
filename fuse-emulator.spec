@@ -8,7 +8,7 @@ License:	GPLv2+
 Group:		Emulators
 Url:		https://fuse-emulator.sourceforge.net/
 Source0:	https://sourceforge.net/projects/fuse-emulator/files/fuse/%{version}/fuse-%{version}.tar.gz
-Source1:	%{sname}-icons.tar.bz2
+#Source1:	%{sname}-icons.tar.bz2
 BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	pkgconfig(bzip2)
@@ -53,7 +53,7 @@ What Fuse does have:
 
 %prep
 %setup -q -n %{sname}-%{version}
-%setup -q -T -D -a1 -n %{sname}-%{version}
+#setup -q -T -D -a1 -n %{sname}-%{version}
 
 %build
 autoreconf -fi
