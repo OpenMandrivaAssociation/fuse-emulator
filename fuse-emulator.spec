@@ -6,7 +6,7 @@ Version:	1.1.1
 Release:	5
 License:	GPLv2+
 Group:		Emulators
-Url:		http://fuse-emulator.sourceforge.net/
+Url:		https://fuse-emulator.sourceforge.net/
 Source0:	%{sname}-%{version}.tar.gz
 Source1:	%{sname}-icons.tar.bz2
 BuildRequires:	flex
