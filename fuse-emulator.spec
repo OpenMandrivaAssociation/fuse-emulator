@@ -9,6 +9,11 @@ Group:		Emulators
 Url:		https://fuse-emulator.sourceforge.net/
 Source0:	%{sname}-%{version}.tar.gz
 Source1:	%{sname}-icons.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	bzip2-devel
