@@ -65,10 +65,11 @@ autoreconf -fi
 %configure2_5x \
 	--enable-gtk2 \
 	--with-roms-dir=%{_datadir}/%{sname}
-%make
+# Generated libtool is a no-op after slibtoolize. Link with slibtool.
+%make LIBTOOL=slibtool-shared
 
 %install
-%makeinstall_std
+%makeinstall_std LIBTOOL=slibtool-shared
 
 mkdir -p %{buildroot}%{_datadir}/applications
 cat<<EOF>%{buildroot}%{_datadir}/applications/%{name}.desktop
