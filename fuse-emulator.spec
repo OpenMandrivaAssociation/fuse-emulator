@@ -18,6 +18,8 @@ BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	bzip2-devel
 BuildRequires:	libspectrum-devel >= %{version}
+# libspectrum.h includes gcrypt.h. The spectrum devel package does not require it.
+BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(audiofile)
