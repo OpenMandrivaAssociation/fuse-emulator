@@ -17,9 +17,7 @@ BuildRequires:	make
 BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	bzip2-devel
-BuildRequires:	jsw-devel
 BuildRequires:	libspectrum-devel >= %{version}
-BuildRequires:	libgcrypt-devel >= 1.1.42
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(audiofile)
@@ -59,11 +57,53 @@ What Fuse does have:
 %prep
 %setup -q -n %{sname}-%{version}
 %setup -q -T -D -a1 -n %{sname}-%{version}
+# AM_PATH_GTK_2_0 and AM_PATH_XML2 compile a test program that does not
+# link in the builders, so GTK is dropped and glib types disappear.
+python - << 'PY'
+from pathlib import Path
+p = Path("configure.ac")
+t = p.read_text()
+old = """    elif test "$gtk3" = no; then
+      AM_PATH_GTK_2_0(2.18.0,,
+        AC_MSG_WARN([GTK+ not found. Reverting to Xlib])
+        gtk=no
+      )
+
+    elif test "$gtk3" = auto; then
+      AM_PATH_GTK_2_0(2.18.0,
+        gtk3=no,
+      )
+"""
+new = """    elif test "$gtk3" = no; then
+      PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.18.0], [],
+        [AC_MSG_WARN([GTK+ not found. Reverting to Xlib])
+         gtk=no])
+
+    elif test "$gtk3" = auto; then
+      PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.18.0],
+        [gtk3=no],
+        [gtk3=auto])
+"""
+if old not in t:
+    raise SystemExit("gtk block not found")
+t = t.replace(old, new, 1)
+old = """  AM_PATH_XML2(2.0.0,AC_DEFINE([HAVE_LIB_XML2], 1,
+               [Defined if we've got libxml2]),
+               AC_MSG_WARN(libxml2 not found - config file will use ini format))
+"""
+new = """  PKG_CHECK_MODULES([XML], [libxml-2.0 >= 2.0.0],
+               [AC_DEFINE([HAVE_LIB_XML2], 1, [Defined if we have got libxml2])],
+               [AC_MSG_WARN([libxml2 not found - config file will use ini format])])
+"""
+if old not in t:
+    raise SystemExit("xml block not found")
+t = t.replace(old, new, 1)
+p.write_text(t)
+PY
 
 %build
 autoreconf -fi
 %configure2_5x \
-	--enable-gtk2 \
 	--with-roms-dir=%{_datadir}/%{sname}
 # Generated libtool is a no-op after slibtoolize. Link with slibtool.
 %make LIBTOOL=slibtool-shared
