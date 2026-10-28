@@ -102,6 +102,8 @@ if old not in t:
 t = t.replace(old, new, 1)
 p.write_text(t)
 PY
+# --prefix=/usr adds -L/usr/lib. /usr/lib/libc.so is the 32-bit linker script.
+sed -i 's|-L\$prefix/lib||' configure.ac
 
 %build
 autoreconf -fi
